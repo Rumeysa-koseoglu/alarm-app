@@ -12,3 +12,6 @@ let alarmSound = new Audio("alarm.mp3");
 let initialHour = 0,
     initialMinute = 0,
     alarmIndex = 0;
+    
+    // Append zero to single-digit numbers
+const appendZero = (value) => (value < 10 ? "0" + value : value);
