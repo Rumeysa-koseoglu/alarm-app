@@ -1,0 +1,27 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background-color: rgb(235, 162, 15);
+}
+
+.hide {
+    display: none;
+}
+
+.wrapper {
+    background-color: #ffffff;
+    width: 90%;
+    max-width: 31.25em;
+    padding: 3.12em 5em;
+    position: absolute;
+    /*moves the element left by half of its own width*/
+    transform: translateX(-50%);
+    left: 50%;
+    top: 1em;
+    border-radius: 0.5em;
+}
