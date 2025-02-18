@@ -7,3 +7,8 @@ const setAlarm = document.getElementById("set");
 //an array to store alarms
 let alarmsArray = [];
 let alarmSound = new Audio("alarm.mp3");
+
+// Starting values for hours, minutes, and alarm numbers
+let initialHour = 0,
+    initialMinute = 0,
+    alarmIndex = 0;
