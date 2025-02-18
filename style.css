@@ -25,3 +25,9 @@ body {
     top: 1em;
     border-radius: 0.5em;
 }
+
+.timer-display {
+    font-size: 2.18em;
+    text-align: center;
+    font-family: "Roboto Mono",monospace;
+}
