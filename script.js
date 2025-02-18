@@ -35,3 +35,15 @@ const searchObject = (parameter, value) => {
     // Return the found information as an array (true/false, object, index number)
     return [exists, alarmObject, objIndex];
 };
+
+//Display Time
+function displayTimer() {
+    //create a new Date object that gives the current date and time
+    let date = new Date();
+    //get hours, minutes, and seconds from the date object
+    let [hours, minutes, seconds] = [
+        appendZero(date.getHours()),//get current hour and add "0" if needed
+        appendZero(date.getMinutes()),//get current minute and add "0" if needed
+        appendZero(date.getSeconds()),//get current second and add "0" if needed
+    ];
+}
