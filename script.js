@@ -1,0 +1,9 @@
+//initial references
+let timerRef = document.querySelector(".timer-display");
+const hourInput = document.getElementById("hourInput");
+const minuteInput = document.getElementById("minuteInput");
+const activeAlarms = document.querySelector(".activeAlarms");
+const setAlarm = document.getElementById("set");
+//an array to store alarms
+let alarmsArray = [];
+let alarmSound = new Audio("alarm.mp3");
