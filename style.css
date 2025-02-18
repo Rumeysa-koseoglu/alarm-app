@@ -47,3 +47,14 @@ body {
     border-radius: 0.5em;
     padding: 0.4em 0.2em;
 }
+
+
+#set {
+    background-color: rgb(235, 162, 15);
+    border: none;
+    padding: 0.9em 1.8em;
+    display: block;
+    margin: 1.5em auto 0 auto;
+    border-radius: 2em;
+    color:#ffffff;
+}
