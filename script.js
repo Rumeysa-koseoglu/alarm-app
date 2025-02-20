@@ -114,4 +114,20 @@ const createAlarm = (alarmObj) => {
     activeAlarms.appendChild(alarmDiv);
 };
 
+//event listener for setting an alarm when the button is clicked
+setAlarm.addEventListener("click", () => {
+    alarmIndex += 1;//increment alarm index
 
+    //create an alarmObject
+    let alarmObj = [];
+    alarmObj.id = `${alarmIndex}_${hourInput.value}_${minuteInput.value}`;//unique ID for the alarm
+    alarmObj.alarmHour = hourInput.value;//store hour input
+    alarmObj.alarmMinute = minuteInput.value;// " minute input
+    alarmObj.isActive = false;//set alarm as inactive initially
+    console.log(alarmObj);//log the created alarm for debugging
+    alarmsArray.push(alarmObj);//add the new alarm to the array
+    createAlarm(alarmObj);//call function to create alarm in UI
+    //reset input fields to default values
+    hourInput.value = appendZero(initialHour);
+    minuteInput.value = appendZero(initialMinute);
+});
