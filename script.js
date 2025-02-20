@@ -89,7 +89,7 @@ const createAlarm = (alarmObj) => {
     alarmDiv.classList.add("alarm");
     alarmDiv.setAttribute("data-id", id); //set a unique ID for the alarm
     //display alarm time
-    alarmDiv.innerHTML = <span>${alarmHour}:${alarmMinute}</span>;
+    alarmDiv.innerHTML = `<span>${alarmHour}:${alarmMinute}</span>`;
 
     //create a checkbox checkbox to enable/disable the alarm
     let checkbox = document.createElement("input");
@@ -105,7 +105,7 @@ const createAlarm = (alarmObj) => {
     alarmDiv.appendChild(checkbox); //add checkbox to the alarm div
     //create a delete button for the alarm
     let deleteButton = document.createElement("button");
-    deleteButton.innerHTML = <i class="fa-solid fa-trash-can"></i>;
+    deleteButton.innerHTML = `<i class="fa-solid fa-trash-can"></i>`;
     deleteButton.classList.add("deleteButton");//add class for styling
     //add event listener for delete function
     deleteButton.addEventListener("click", (e) => deleteAlarm(e));
