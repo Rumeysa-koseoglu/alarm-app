@@ -107,3 +107,27 @@ body {
     border: none;
     cursor: pointer;
 }
+
+
+/* mobile responsiveness */
+
+@media (max-width:480px) {
+
+    .timer-display {
+        font-size: 2.18em;
+    }
+
+    input {
+        margin-right: 1em;
+        margin-left: 1em;
+    }
+
+    #set {
+        padding: 0.9em 4.5em;
+    }
+
+    .alarm {
+        align-items: center;
+        display: grid;
+    }
+}
