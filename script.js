@@ -48,4 +48,15 @@ function displayTimer() {
     ];
 
     timerRef.innerHTML = `${hours}:${minutes}:${seconds}`;
+
+        //alarm
+        alarmsArray.forEach((alarm, index) => {
+            if (alarm.isActive) { //check if the alarm is turned on
+                if (`${alarm.alarmHour}:${alarm.alarmMinute}`// compare current time with alarm time
+                     === `${hours}:${minutes}`) {
+                        alarmSound.play();//play the alarm sond
+                        alarmSound.loop = true; //keep the alarm sound looping
+                     }
+     }
+});
 }
