@@ -18,7 +18,7 @@ const appendZero = (value) => (value < 10 ? "0" + value : value);
 
 // Search for a value in an object
 const searchObject = (parameter, value) => {
-    let alarmObject, // Variable to store the object we found
+    let alarmObject, // Variable to store the object(alarm) we found
         objIndex,    // Variable to store the index of the found object in the array
         exists = false; // Initially false (because we haven't found anything yet)
 
@@ -46,4 +46,6 @@ function displayTimer() {
         appendZero(date.getMinutes()),//get current minute and add "0" if needed
         appendZero(date.getSeconds()),//get current second and add "0" if needed
     ];
+
+    timerRef.innerHTML = `${hours}:${minutes}:${seconds}`;
 }
