@@ -91,7 +91,7 @@ const createAlarm = (alarmObj) => {
     //display alarm time
     alarmDiv.innerHTML = `<span>${alarmHour}:${alarmMinute}</span>`;
 
-    //create a checkbox checkbox to enable/disable the alarm
+    //create a checkbox to enable/disable the alarm
     let checkbox = document.createElement("input");
     checkbox.setAttribute("type", "checkbox");//set type as checkbox
     checkbox.addEventListener("click", (e) => {
@@ -119,7 +119,7 @@ setAlarm.addEventListener("click", () => {
     alarmIndex += 1;//increment alarm index
 
     //create an alarmObject
-    let alarmObj = [];
+    let alarmObj = {};
     alarmObj.id = `${alarmIndex}_${hourInput.value}_${minuteInput.value}`;//unique ID for the alarm
     alarmObj.alarmHour = hourInput.value;//store hour input
     alarmObj.alarmMinute = minuteInput.value;// " minute input
@@ -131,6 +131,46 @@ setAlarm.addEventListener("click", () => {
     hourInput.value = appendZero(initialHour);
     minuteInput.value = appendZero(initialMinute);
 });
+
+//start alarm
+//turn on the alarm when checkbox checked
+const startAlarm = (e) => {
+    let searchId = e.target.parentElement.getAttribute("data-id");
+    //call the searchObject function to find if an alarm with "data-id" exist in alarmsArray
+    let [exists, obj, index] = searchObject("id",searchId);
+    //if the alarm exists, set isActive = true 
+    if (exists) {
+        alarmsArray[index].isActive = true;
+    }
+};
+
+//stop alarm
+//turn off the alarm when the checkbox is unchecked
+const stopAlarm = (e) => {
+    //get the data-id attribut from the parent div of the checkbox
+    let searchId = e.target.parentElement.getAttribute("data-id");
+    let [exists, obj, index] = searchObject("id",searchId);
+    //if the alarm exist: set isActive = false (turn it of)
+    if (exists) {
+        alarmsArray[index].isActive = false;
+        //stop playing the alarm sound
+        alarmSound.pause();
+    }
+};
+
+//delete alarm
+const deleteAlarm = (e) => {
+    let searchId = e.target.parentElement.parentElement.
+    getAttribute("data-id");
+    //search for the alarm in alarmsArray
+    let [exists, obj, index] = searchObject("id",searchId);
+    //if the alarm exists: remove it from the HTML
+    if (exists) {
+        e.target.parentElement.parentElement.remove();
+        //delete it from the alarmsArray
+        alarmsArray.splice(index, 1);
+    }
+}
 
 //function to start the timer when the page loads
 window.onload = () => {
