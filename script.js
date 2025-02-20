@@ -131,3 +131,14 @@ setAlarm.addEventListener("click", () => {
     hourInput.value = appendZero(initialHour);
     minuteInput.value = appendZero(initialMinute);
 });
+
+//function to start the timer when the page loads
+window.onload = () => {
+    setInterval(displayTimer);
+    initialHour = 0;
+    initialMinute = 0;
+    alarmIndex = 0;
+    alarmsArray = [];
+    hourInput.value = appendZero(initialHour);
+    minuteInput.value = appendZero(initialMinute);
+};
