@@ -78,3 +78,40 @@ hourInput.addEventListener("input", () => {
 minuteInput.addEventListener("input", () => {
     minuteInput.value = InputCheck(minuteInput.value);
 });
+
+//create alarm div
+//create an alarm element in the UI
+const createAlarm = (alarmObj) => {
+    //keys from object
+    const {id, alarmHour, alarmMinute } = alarmObj;
+    //create a new div element for the alarm
+    let alarmDiv = document.createElement("div");
+    alarmDiv.classList.add("alarm");
+    alarmDiv.setAttribute("data-id", id); //set a unique ID for the alarm
+    //display alarm time
+    alarmDiv.innerHTML = <span>${alarmHour}:${alarmMinute}</span>;
+
+    //create a checkbox checkbox to enable/disable the alarm
+    let checkbox = document.createElement("input");
+    checkbox.setAttribute("type", "checkbox");//set type as checkbox
+    checkbox.addEventListener("click", (e) => {
+        if (e.target.checked) {
+            startAlarm(e);//start the alarm when checked
+        }
+        else{
+            stopAlarm(e);//stop the alarm when unchecked
+        }
+    });
+    alarmDiv.appendChild(checkbox); //add checkbox to the alarm div
+    //create a delete button for the alarm
+    let deleteButton = document.createElement("button");
+    deleteButton.innerHTML = <i class="fa-solid fa-trash-can"></i>;
+    deleteButton.classList.add("deleteButton");//add class for styling
+    //add event listener for delete function
+    deleteButton.addEventListener("click", (e) => deleteAlarm(e));
+    alarmDiv.appendChild(deleteButton);
+    //append the alarm div to the active alarms list
+    activeAlarms.appendChild(alarmDiv);
+};
+
+
