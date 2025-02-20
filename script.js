@@ -60,3 +60,21 @@ function displayTimer() {
      }
 });
 }
+
+//check and format the input values
+const InputCheck = (inputValue) => {
+    inputValue = parseInt(inputValue);//convert input value to a number
+    if (inputValue < 10) { //if the numbet is less than 10
+        inputValue = appendZero(inputValue);//add a leading zero
+    }
+    return inputValue;// return the formatted value
+};
+
+//add event listener to hour inpt field
+hourInput.addEventListener("input", () => {
+    hourInput.value = InputCheck(hourInput.value); //format the input value
+});
+
+minuteInput.addEventListener("input", () => {
+    minuteInput.value = InputCheck(minuteInput.value);
+});
