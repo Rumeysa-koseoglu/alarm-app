@@ -22,14 +22,14 @@ body {
     /*moves the element left by half of its own width*/
     transform: translateX(-50%);
     left: 50%;
-    top: 30%;
+    top: 20%;
     border-radius: 0.5em;
 }
 
 .timer-display {
     font-size: 2.18em;
     text-align: center;
-    font-family: "Roboto Mono",monospace;
+    font-family: "Roboto Mono", monospace;
 }
 
 .inputs {
@@ -56,7 +56,7 @@ body {
     display: block;
     margin: 1.5em auto 0 auto;
     border-radius: 2em;
-    color:#ffffff;
+    color: #ffffff;
 }
 
 .alarm {
@@ -96,7 +96,7 @@ body {
 }
 
 .alarm input[type="checkbox"]:checked:before {
-    background-color:rgb(235, 162, 15);
+    background-color: rgb(235, 162, 15);
     left: 2em;
 }
 
@@ -108,10 +108,20 @@ body {
     cursor: pointer;
 }
 
+.activeAlarms {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 5px;
+}
+
 
 /* mobile responsiveness */
 
 @media (max-width:480px) {
+
+    .wrapper {
+        padding: 3.12em 3em;
+    }
 
     .timer-display {
         font-size: 2.18em;
@@ -123,11 +133,17 @@ body {
     }
 
     #set {
-        padding: 0.9em 4.5em;
+        padding: 0.7em 4em;
     }
 
     .alarm {
         align-items: center;
         display: grid;
+        width: 250px;
+    }
+
+    .activeAlarms {
+        max-height: 200px;
+        padding-left: 1em;
     }
 }
