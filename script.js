@@ -13,7 +13,7 @@ let initialHour = 0,
     initialMinute = 0,
     alarmIndex = 0;
 
-    // Append zero to single-digit numbers
+// Append zero to single-digit numbers
 const appendZero = (value) => (value < 10 ? "0" + value : value);
 
 // Search for a value in an object
@@ -49,41 +49,47 @@ function displayTimer() {
 
     timerRef.innerHTML = `${hours}:${minutes}:${seconds}`;
 
-        //alarm
-        alarmsArray.forEach((alarm, index) => {
-            if (alarm.isActive) { //check if the alarm is turned on
-                if (`${alarm.alarmHour}:${alarm.alarmMinute}`// compare current time with alarm time
-                     === `${hours}:${minutes}`) {
-                        alarmSound.play();//play the alarm sond
-                        alarmSound.loop = true; //keep the alarm sound looping
-                     }
-     }
-});
+    //alarm
+    alarmsArray.forEach((alarm, index) => {
+        if (alarm.isActive) { //check if the alarm is turned on
+            if (`${alarm.alarmHour}:${alarm.alarmMinute}`// compare current time with alarm time
+                === `${hours}:${minutes}`) {
+                alarmSound.play();//play the alarm sond
+                alarmSound.loop = true; //keep the alarm sound looping
+
+
+                setTimeout(() => {
+                    alarmSound.pause();
+                    alarmSound.currentTime = 0;
+                }, 10000);
+            }
+        }
+    });
 }
 
 //check and format the input values
-const InputCheck = (inputValue) => {
-    inputValue = parseInt(inputValue);//convert input value to a number
-    if (inputValue < 10) { //if the numbet is less than 10
-        inputValue = appendZero(inputValue);//add a leading zero
-    }
-    return inputValue;// return the formatted value
-};
+// const InputCheck = (inputValue) => {
+//     inputValue = parseInt(inputValue);//convert input value to a number
+//     if (inputValue < 10) { //if the numbet is less than 10
+//         inputValue = appendZero(inputValue);//add a leading zero
+//     }
+//     return inputValue;// return the formatted value
+// };
 
 //add event listener to hour inpt field
 hourInput.addEventListener("input", () => {
-    hourInput.value = InputCheck(hourInput.value); //format the input value
+    // hourInput.value = InputCheck(hourInput.value); //format the input value
 });
 
 minuteInput.addEventListener("input", () => {
-    minuteInput.value = InputCheck(minuteInput.value);
+    // minuteInput.value = InputCheck(minuteInput.value);
 });
 
 //create alarm div
 //create an alarm element in the UI
 const createAlarm = (alarmObj) => {
     //keys from object
-    const {id, alarmHour, alarmMinute } = alarmObj;
+    const { id, alarmHour, alarmMinute } = alarmObj;
     //create a new div element for the alarm
     let alarmDiv = document.createElement("div");
     alarmDiv.classList.add("alarm");
@@ -98,7 +104,7 @@ const createAlarm = (alarmObj) => {
         if (e.target.checked) {
             startAlarm(e);//start the alarm when checked
         }
-        else{
+        else {
             stopAlarm(e);//stop the alarm when unchecked
         }
     });
@@ -120,9 +126,9 @@ setAlarm.addEventListener("click", () => {
 
     //create an alarmObject
     let alarmObj = {};
-    alarmObj.id = `${alarmIndex}_${hourInput.value}_${minuteInput.value}`;//unique ID for the alarm
-    alarmObj.alarmHour = hourInput.value;//store hour input
-    alarmObj.alarmMinute = minuteInput.value;// " minute input
+    alarmObj.id = `${alarmIndex}_${hourInput.value}_${minuteInput.value}`;//unique ID for each alarm
+    alarmObj.alarmHour = appendZero(hourInput.value);//store hour input
+    alarmObj.alarmMinute = appendZero(minuteInput.value);// " minute input
     alarmObj.isActive = false;//set alarm as inactive initially
     console.log(alarmObj);//log the created alarm for debugging
     alarmsArray.push(alarmObj);//add the new alarm to the array
@@ -137,7 +143,7 @@ setAlarm.addEventListener("click", () => {
 const startAlarm = (e) => {
     let searchId = e.target.parentElement.getAttribute("data-id");
     //call the searchObject function to find if an alarm with "data-id" exist in alarmsArray
-    let [exists, obj, index] = searchObject("id",searchId);
+    let [exists, obj, index] = searchObject("id", searchId);
     //if the alarm exists, set isActive = true 
     if (exists) {
         alarmsArray[index].isActive = true;
@@ -147,9 +153,9 @@ const startAlarm = (e) => {
 //stop alarm
 //turn off the alarm when the checkbox is unchecked
 const stopAlarm = (e) => {
-    //get the data-id attribut from the parent div of the checkbox
+    //get the data-id attribute from the parent div of the checkbox
     let searchId = e.target.parentElement.getAttribute("data-id");
-    let [exists, obj, index] = searchObject("id",searchId);
+    let [exists, obj, index] = searchObject("id", searchId);
     //if the alarm exist: set isActive = false (turn it of)
     if (exists) {
         alarmsArray[index].isActive = false;
@@ -161,9 +167,9 @@ const stopAlarm = (e) => {
 //delete alarm
 const deleteAlarm = (e) => {
     let searchId = e.target.parentElement.parentElement.
-    getAttribute("data-id");
+        getAttribute("data-id");
     //search for the alarm in alarmsArray
-    let [exists, obj, index] = searchObject("id",searchId);
+    let [exists, obj, index] = searchObject("id", searchId);
     //if the alarm exists: remove it from the HTML
     if (exists) {
         e.target.parentElement.parentElement.remove();
@@ -174,6 +180,29 @@ const deleteAlarm = (e) => {
 
 //function to start the timer when the page loads
 window.onload = () => {
+
+    for (let i = 0; i < 60; i++) {
+        let newOption = document.createElement("option");
+        newOption.value = i;
+        newOption.text = i.toString();
+        newOption.text = appendZero(i);
+        
+        minuteInput.appendChild(newOption);
+    }
+    
+
+
+    for (let i = 0; i < 24; i++) {
+        let newOption = document.createElement("option");
+        newOption.value = i;
+        newOption.text = i.toString();
+        newOption.text = appendZero(i);
+
+        hourInput.appendChild(newOption);
+    }
+
+
+
     setInterval(displayTimer);
     initialHour = 0;
     initialMinute = 0;
